@@ -1,0 +1,15 @@
+/home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/CPUsimulator
+/home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/CPUsimulator.deps.json
+/home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/CPUsimulator.runtimeconfig.json
+/home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/CPUsimulator.dll
+/home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/ref/CPUsimulator.dll
+/home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/CPUsimulator.pdb
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.csproj.AssemblyReference.cache
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.GeneratedMSBuildEditorConfig.editorconfig
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.AssemblyInfoInputs.cache
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.AssemblyInfo.cs
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.csproj.CoreCompileInputs.cache
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.dll
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/ref/CPUsimulator.dll
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.pdb
+/home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.genruntimeconfig.cache
