@@ -1,23 +1,20 @@
-﻿using System.Text.Json;
-
-class App
-{
-    static void Main()
+﻿
+namespace Simulator{
+    class App
     {
-        // string data = File.ReadAllText(@"./Tasks.json");
-        
-        // using JsonDocument doc = JsonDocument.Parse(data);
-        // JsonElement root = doc.RootElement;
+        static void Main()
+        {
+            // string data = File.ReadAllText(@"./Tasks.json");
+            
+            // using JsonDocument doc = JsonDocument.Parse(data);
+            // JsonElement root = doc.RootElement;
 
-        // Console.WriteLine(root.GetProperty("cpuNumber"));
+            // Console.WriteLine(root.GetProperty("cpuNumber"));
 
-        // Console.WriteLine(root.GetProperty("Tasks")[0].GetProperty("id"))
-        
-        JSONAdapter myAdapter = new JSONAdapter("./Tasks.json");
+            // Console.WriteLine(root.GetProperty("Tasks")[0].GetProperty("id"))
 
-        Console.WriteLine(myAdapter.cpuNumber);
+            CPUSimulator mySimulator = new CPUSimulator("./Tasks.json");
 
-        Console.WriteLine(myAdapter.Tasks);
-
+        }
     }
 }

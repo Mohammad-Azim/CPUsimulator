@@ -4,7 +4,13 @@ namespace Simulator{
         public int ClockCycleNow = 0;
 
 
-         public CPUSimulator(List<Processor> CPUList,List<Task> HighTasks ,List<Task> LowTasks ){
+         public CPUSimulator(string path){
+
+            JSONAdapter myAdapter = new JSONAdapter(path);
+
+            Console.WriteLine(myAdapter.cpuNumber);
+
+            Console.WriteLine(myAdapter.Tasks);
             
         }
 
@@ -13,11 +19,6 @@ namespace Simulator{
             
 
             while (!Scheduler.isFinish){
-
-
-            
-
-
 
                 ClockCycleNow +=1;
                 if (ClockCycleNow > 30){
