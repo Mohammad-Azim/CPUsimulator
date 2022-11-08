@@ -22,6 +22,9 @@ namespace Simulator
         }
 
 
+
+
+
         public Dictionary<string, Dictionary<int, List<CPUTask>>> Converter(JsonElement json_Tasks)
         {
 
@@ -44,7 +47,8 @@ namespace Simulator
                     RequestedTime = Int32.Parse(currentTask.GetProperty("RequestedTime").ToString()),
                     Priority = currentTask.GetProperty("Priority").ToString(),
                     CompletionTime = 0,
-                    State = "waiting"
+                    State = "waiting",
+                    ProcessedTime = 0
                 };
 
                 if (NewTask.Priority == "high")
@@ -78,8 +82,9 @@ namespace Simulator
             }
 
 
-            Console.WriteLine(All_Tasks["high"][5][0]);
+            // Console.WriteLine(All_Tasks["high"][5][0]);
 
+            this.AllDicTasks = All_Tasks;
             return All_Tasks;
         }
 

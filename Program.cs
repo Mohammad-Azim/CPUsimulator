@@ -14,7 +14,9 @@ namespace Simulator
 
             // Console.WriteLine(root.GetProperty("Tasks")[0].GetProperty("id"))
 
-            CPUSimulator mySimulator = new CPUSimulator("./Tasks.json");
+            // CPUSimulator mySimulator = new CPUSimulator("./Tasks.json");
+
+            Scheduler mySc = new Scheduler();
 
         }
     }

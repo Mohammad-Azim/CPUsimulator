@@ -13,25 +13,25 @@ namespace Simulator
 
             Console.WriteLine(myAdapter.cpuNumber);
 
-            Console.WriteLine(myAdapter.Tasks[0].GetProperty("id"));
+            Console.WriteLine(myAdapter.AllDicTasks?["high"][5][0]);
 
         }
 
 
-        public void StartSimulate()
-        {
+        // public void StartSimulate()
+        // {
 
 
-            while (!Scheduler.isFinish)
-            {
+        //     while (!Scheduler.isFinish)
+        //     {
 
-                ClockCycleNow += 1;
-                if (ClockCycleNow > 30)
-                {
-                    Scheduler.isFinish = true;
-                }
-            }
+        //         ClockCycleNow += 1;
+        //         if (ClockCycleNow > 30)
+        //         {
+        //             Scheduler.isFinish = true;
+        //         }
+        //     }
 
-        }
+        // }
     }
 }

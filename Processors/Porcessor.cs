@@ -1,15 +1,14 @@
-namespace Simulator{
+namespace Simulator
+{
 
-    record Processor {
+    record Processor
+    {
+        public int Id;
+        public string? state;
 
-    public static int IdleNumber;
-    public int Id;
-    public string? state;
+        public CPUTask? CurrentTask;
 
-    public int CurrentTaskId;
-    
 
-    // public int X { get; init; }
 
     }
 }
