@@ -1,17 +1,19 @@
-namespace Simulator{
+namespace Simulator
+{
 
-    record Task {
+    public record CPUTask
+    {
 
-    public string? Id;
-    public int CreationTime;
-    public int CompletionTime;
-    public int RequestedTime;
-    public string? Priority;
-    public string? State;
+        public string? Id { get; init; }
+        public int CreationTime { get; init; }
+        public int RequestedTime { get; init; }
+        public string? Priority { get; init; }
 
-    // public int X { get; init; }
+        //  the below can be modified
+        public string? State { get; set; }
+        public int CompletionTime { get; set; }
 
-    
+
 
     }
 }

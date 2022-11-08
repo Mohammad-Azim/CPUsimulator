@@ -6,7 +6,7 @@
       "CreationTime": 5,
       "RequestedTime": 9,
       "Priority": "high",
-      "Completion time": null,
+      "CompletionTime": null,
       "State": null
     },
     {
@@ -14,7 +14,7 @@
       "CreationTime": 5,
       "RequestedTime": 9,
       "Priority": "low",
-      "Completion time": null,
+      "CompletionTime": null,
       "State": null
     }
   ]

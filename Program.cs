@@ -1,11 +1,12 @@
 ﻿
-namespace Simulator{
+namespace Simulator
+{
     class App
     {
         static void Main()
         {
             // string data = File.ReadAllText(@"./Tasks.json");
-            
+
             // using JsonDocument doc = JsonDocument.Parse(data);
             // JsonElement root = doc.RootElement;
 
