@@ -9,6 +9,8 @@ namespace Simulator
         Queue<CPUTask> HighTasksWaiting = new Queue<CPUTask>();
         Queue<CPUTask> LowTasksWaiting = new Queue<CPUTask>();
 
+        Queue<CPUTask> InterruptedTasks = new Queue<CPUTask>();
+
         static Queue<Processor> idleProcessors = new Queue<Processor>();
         static Dictionary<int, Processor> busyProcessors = new Dictionary<int, Processor>();
 
@@ -33,6 +35,7 @@ namespace Simulator
 
             int currentCycle = Scheduler.ClockCycleNow;
 
+
             if (AllTasks["high"].ContainsKey(currentCycle))
             {
 
@@ -40,6 +43,7 @@ namespace Simulator
                 {
                     task.State = "waiting";
                     this.HighTasksWaiting.Enqueue(task);
+
 
 
                 }
@@ -69,6 +73,16 @@ namespace Simulator
             Task.State = "executing";
             Task.CreationTime = Scheduler.ClockCycleNow;
 
+        }
+
+        public void AddTaskToBusyProcessor(Processor processor, CPUTask task)
+        {
+
+
+            CPUTask oldTask = processor.CurrentTask!;
+
+            processor.CurrentTask = task;
+            InterruptedTasks.Enqueue(oldTask);
         }
 
         public bool IsTaskDone(CPUTask task)
@@ -121,37 +135,67 @@ namespace Simulator
 
                     }
 
-
-
-
-
                 }
             }
         }
 
         public void ProcessorsManagement()
         {
-            /// wrong should be while until fill all processors 
-
-            if (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0)
+            if (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0 || this.InterruptedTasks.Count > 0)
             {
-                while (idleProcessors.Count > 0 && (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0))
+                while ((idleProcessors.Count > 0 && (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0 || this.InterruptedTasks.Count > 0)) || (IsThereProcessorWithLowTask() != null && this.HighTasksWaiting.Count > 0))
                 {
+
                     if (this.HighTasksWaiting.Count > 0)
                     {
+                        var ProcessorWithLowTask = IsThereProcessorWithLowTask();
 
-                        CPUTask task = this.HighTasksWaiting.Dequeue();
-                        AddTaskToProcessor(task);
-
+                        if (idleProcessors.Count > 0)
+                        {
+                            CPUTask task = this.HighTasksWaiting.Dequeue();
+                            AddTaskToProcessor(task);
+                        }
+                        else if (ProcessorWithLowTask != null)
+                        {
+                            CPUTask task = this.HighTasksWaiting.Dequeue();
+                            AddTaskToBusyProcessor(ProcessorWithLowTask, task);
+                        }
                     }
-                    else if (this.LowTasksWaiting.Count > 0)
+                    else if (idleProcessors.Count > 0)
                     {
-                        CPUTask task = this.LowTasksWaiting.Dequeue();
-                        AddTaskToProcessor(task);
+
+                        if (this.InterruptedTasks.Count > 0)
+                        {
+
+                            CPUTask task = this.InterruptedTasks.Dequeue();
+                            AddTaskToProcessor(task);
+                        }
+                        else if (this.LowTasksWaiting.Count > 0)
+                        {
+                            CPUTask task = this.LowTasksWaiting.Dequeue();
+                            AddTaskToProcessor(task);
+                        }
                     }
+
+
                 }
             }
 
+        }
+
+        public Processor? IsThereProcessorWithLowTask()
+        {
+            foreach (int processorsKey in busyProcessors.Keys)
+            {
+                Processor currentProcessor = busyProcessors[processorsKey];
+
+                if (currentProcessor.CurrentTask!.Priority == "low")
+                {
+                    return currentProcessor;
+                }
+
+            }
+            return null;
         }
 
 
@@ -171,7 +215,7 @@ namespace Simulator
 
 
 
-            while (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0 || IsThereTaskInDictionary(JsonAdapter) || Scheduler.busyProcessors.Count > 0)
+            while (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0 || this.InterruptedTasks.Count > 0 || IsThereTaskInDictionary(JsonAdapter) || Scheduler.busyProcessors.Count > 0)
             {
 
 
@@ -183,10 +227,13 @@ namespace Simulator
                 this.ProcessorsManagement();
 
 
+
                 Scheduler.ClockCycleNow += 1;
 
+
+
             }
-            Console.WriteLine("TheEnd");
+            Console.WriteLine("------------------- TheEnd -------------------");
         }
 
 
@@ -195,12 +242,6 @@ namespace Simulator
 
             JSONAdapter myAdapter = new JSONAdapter("./Tasks.json");
             this.ClockCycleRunner(myAdapter);
-
-            // Console.WriteLine(myAdapter.cpuNumber);
-
-            // Console.WriteLine(myAdapter.AllDicTasks?["high"][5][0]);
-            // Console.WriteLine(myAdapter.AllDicTasks?["high"][5][0]);
-
 
         }
 
