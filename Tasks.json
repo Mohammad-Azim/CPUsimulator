@@ -1,5 +1,5 @@
 {
-  "cpuNumber": 1,
+  "cpuNumber": 2,
   "Tasks": [
     {
       "id": 1,
@@ -12,6 +12,22 @@
     {
       "id": 2,
       "CreationTime": 3,
+      "RequestedTime": 3,
+      "Priority": "high",
+      "CompletionTime": null,
+      "State": null
+    },
+    {
+      "id": 3,
+      "CreationTime": 4,
+      "RequestedTime": 3,
+      "Priority": "high",
+      "CompletionTime": null,
+      "State": null
+    },
+    {
+      "id": 4,
+      "CreationTime": 7,
       "RequestedTime": 3,
       "Priority": "high",
       "CompletionTime": null,

@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Simulator
 {
 
@@ -104,6 +106,19 @@ namespace Simulator
             busyProcessors.Remove(processor.Id);
             idleProcessors.Enqueue(processor);
 
+
+            string[] NewTaskResults = {
+                "New Task Finished",$"task Id: {task.Id}",
+                $"Task State: {task.State}",
+                $"Task CreationTime: {task.CreationTime}",
+                $"Task CompletionTime: {task.CompletionTime}",
+                $"Task ProcessedTime: {task.ProcessedTime}",
+                $"Task RequestedTime: {task.RequestedTime}",
+                ""
+                };
+
+            Results.SimulatorResults = Results.SimulatorResults.Concat(NewTaskResults).ToArray();
+
             Console.WriteLine("New Task Finished");
             Console.WriteLine($"task Id: {task.Id}");
             Console.WriteLine($"Task State: {task.State}");
@@ -111,7 +126,10 @@ namespace Simulator
             Console.WriteLine($"Task CompletionTime: {task.CompletionTime}");
             Console.WriteLine($"Task ProcessedTime: {task.ProcessedTime}");
             Console.WriteLine($"Task RequestedTime: {task.RequestedTime}");
+            Console.WriteLine("");
         }
+
+
 
 
         public void ProcessorRunningOneClock()
@@ -210,10 +228,7 @@ namespace Simulator
         public void ClockCycleRunner(JSONAdapter JsonAdapter)
         {
             this.CreateProcessors(JsonAdapter.cpuNumber);
-
-
-
-
+            Results MyResults = new Results();
 
             while (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0 || this.InterruptedTasks.Count > 0 || IsThereTaskInDictionary(JsonAdapter) || Scheduler.busyProcessors.Count > 0)
             {
@@ -234,12 +249,12 @@ namespace Simulator
 
             }
             Console.WriteLine("------------------- TheEnd -------------------");
+            Results.PrintResultToFile(Results.SimulatorResults);
         }
 
 
         public Scheduler()
         {
-
             JSONAdapter myAdapter = new JSONAdapter("./Tasks.json");
             this.ClockCycleRunner(myAdapter);
 
