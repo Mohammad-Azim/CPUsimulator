@@ -24,7 +24,6 @@ namespace Simulator
                 NewProcessor.CurrentTask = null;
 
                 idleProcessors.Enqueue(NewProcessor);
-
             }
         }
 
@@ -60,7 +59,6 @@ namespace Simulator
 
         public void AddTaskToProcessor(CPUTask Task)
         {
-
             Processor processor = idleProcessors.Dequeue();
             busyProcessors.Add(processor.Id, processor);
 
@@ -76,6 +74,7 @@ namespace Simulator
         public bool IsTaskDone(CPUTask task)
         {
             // check if task in cpu is done
+
             return (task.ProcessedTime == task.RequestedTime);
         }
 
@@ -86,16 +85,18 @@ namespace Simulator
             task.State = "completed";
             task.CompletionTime = Scheduler.ClockCycleNow;
 
+
             processor.CurrentTask = null;
+            busyProcessors.Remove(processor.Id);
+            idleProcessors.Enqueue(processor);
 
-            Console.Write(task.Id);
-            Console.Write(task.State);
-            Console.Write(task.CreationTime);
-            Console.Write(task.CompletionTime);
-            Console.Write(task.ProcessedTime);
-            Console.Write(task.RequestedTime);
-            Console.WriteLine("another Task down");
-
+            Console.WriteLine("New Task Finished");
+            Console.WriteLine($"task Id: {task.Id}");
+            Console.WriteLine($"Task State: {task.State}");
+            Console.WriteLine($"Task CreationTime: {task.CreationTime}");
+            Console.WriteLine($"Task CompletionTime: {task.CompletionTime}");
+            Console.WriteLine($"Task ProcessedTime: {task.ProcessedTime}");
+            Console.WriteLine($"Task RequestedTime: {task.RequestedTime}");
         }
 
 
@@ -103,21 +104,27 @@ namespace Simulator
         {
 
 
-            if (Scheduler.busyProcessors.Any())
+            if (Scheduler.busyProcessors.Count > 0)
             {
 
                 foreach (int processorsKey in busyProcessors.Keys)
                 {
-
                     Processor currentProcessor = busyProcessors[processorsKey];
-
-                    currentProcessor.CurrentTask!.ProcessedTime += 1;
-
-                    if (IsTaskDone(currentProcessor.CurrentTask))
+                    if (IsTaskDone(currentProcessor.CurrentTask!))
                     {
-
                         RemoveTaskFromProcessor(currentProcessor);
                     }
+                    else
+                    {
+
+                        currentProcessor.CurrentTask!.ProcessedTime += 1;
+
+                    }
+
+
+
+
+
                 }
             }
         }
@@ -128,21 +135,19 @@ namespace Simulator
 
             if (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0)
             {
-                for (int z = 0; Scheduler.idleProcessors.Count > z; z++)
+                while (idleProcessors.Count > 0 && (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0))
                 {
                     if (this.HighTasksWaiting.Count > 0)
                     {
 
                         CPUTask task = this.HighTasksWaiting.Dequeue();
                         AddTaskToProcessor(task);
-                        idleProcessors.Dequeue();
 
                     }
                     else if (this.LowTasksWaiting.Count > 0)
                     {
                         CPUTask task = this.LowTasksWaiting.Dequeue();
                         AddTaskToProcessor(task);
-                        idleProcessors.Dequeue();
                     }
                 }
             }
@@ -164,7 +169,9 @@ namespace Simulator
 
 
 
-            while (this.HighTasksWaiting.Any() || this.LowTasksWaiting.Any() || IsThereTaskInDictionary(JsonAdapter))
+
+
+            while (this.HighTasksWaiting.Count > 0 || this.LowTasksWaiting.Count > 0 || IsThereTaskInDictionary(JsonAdapter) || Scheduler.busyProcessors.Count > 0)
             {
 
 
@@ -179,6 +186,7 @@ namespace Simulator
                 Scheduler.ClockCycleNow += 1;
 
             }
+            Console.WriteLine("TheEnd");
         }
 
 
@@ -192,6 +200,8 @@ namespace Simulator
 
             // Console.WriteLine(myAdapter.AllDicTasks?["high"][5][0]);
             // Console.WriteLine(myAdapter.AllDicTasks?["high"][5][0]);
+
+
         }
 
 

@@ -17,7 +17,6 @@ namespace Simulator
             // CPUSimulator mySimulator = new CPUSimulator("./Tasks.json");
 
             Scheduler mySc = new Scheduler();
-
         }
     }
 }
