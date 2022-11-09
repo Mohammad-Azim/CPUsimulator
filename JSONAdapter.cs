@@ -82,7 +82,6 @@ namespace Simulator
             }
 
 
-            // Console.WriteLine(All_Tasks["high"][5][0]);
 
             this.AllDicTasks = All_Tasks;
             return All_Tasks;
