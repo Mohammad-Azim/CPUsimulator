@@ -3,13 +3,34 @@ using System.Text.Json;
 
 namespace Simulator
 {
-    class JSONAdapter
+    class FilesManager
     {
         public int cpuNumber { get; set; }
         public JsonElement Tasks { get; set; }
         public Dictionary<string, Dictionary<int, List<CPUTask>>>? AllDicTasks { get; set; }
 
-        public JSONAdapter(string path)
+        public string[] SimulatorResults = { "--------CPU Simulator--------" };
+
+        public void PrintResultToFile(string[] lines)
+        {
+            var myUniqueFileName = $@"./FilesManager/{Guid.NewGuid()}.txt";
+
+            File.WriteAllLinesAsync(myUniqueFileName, lines);
+        }
+
+
+        public void PrintResultInCMD(CPUTask task)
+        {
+            Console.WriteLine("New Task Finished");
+            Console.WriteLine($"task Id: {task.Id}");
+            Console.WriteLine($"Task State: {task.State}");
+            Console.WriteLine($"Task CreationTime: {task.CreationTime}");
+            Console.WriteLine($"Task CompletionTime: {task.CompletionTime}");
+            Console.WriteLine($"Task ProcessedTime: {task.ProcessedTime}");
+            Console.WriteLine($"Task RequestedTime: {task.RequestedTime}");
+            Console.WriteLine("");
+        }
+        public void StartReading(string path)
         {  //./Tasks.json
             string data = File.ReadAllText(@"" + path);
 
