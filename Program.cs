@@ -1,7 +1,7 @@
 ﻿
 namespace Simulator
 {
-    class App
+    class Program
     {
         static void Main()
         {
