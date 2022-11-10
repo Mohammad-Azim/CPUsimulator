@@ -5,10 +5,6 @@ namespace Simulator
     {
         public int Id;
         public string? state;
-
         public CPUTask? CurrentTask;
-
-
-
     }
 }
