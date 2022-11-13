@@ -14,9 +14,11 @@ namespace Simulator
 
         public string[] SimulatorResults = { "--------CPU Simulator--------" };
 
-        public void PrintResultToFile(string[] lines)
+        public void CreateFileWithResults(string[] lines)
         {
-            var myUniqueFileName = $@"./FilesManager/{Guid.NewGuid()}.txt";
+            string datee = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var myUniqueFileName = $@"./FilesManager/results({datee}).txt";
+
 
             File.WriteAllLinesAsync(myUniqueFileName, lines);
         }

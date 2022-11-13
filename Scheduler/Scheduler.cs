@@ -166,7 +166,7 @@ namespace Simulator
                 this.ClockCycleNow += 1;
             }
             Console.WriteLine("------------------- TheEnd -------------------");
-            myAdapter.PrintResultToFile(myAdapter.SimulatorResults);
+            myAdapter.CreateFileWithResults(myAdapter.SimulatorResults);
         }
 
 
