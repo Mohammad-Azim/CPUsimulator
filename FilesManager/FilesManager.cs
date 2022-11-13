@@ -23,18 +23,6 @@ namespace Simulator
             File.WriteAllLinesAsync(myUniqueFileName, lines);
         }
 
-
-        public void PrintResultInCMD(CPUTask task)
-        {
-            Console.WriteLine("New Task Finished");
-            Console.WriteLine($"task Id: {task.Id}");
-            Console.WriteLine($"Task State: {task.State}");
-            Console.WriteLine($"Task CreationTime: {task.CreationTime}");
-            Console.WriteLine($"Task CompletionTime: {task.CompletionTime}");
-            Console.WriteLine($"Task ProcessedTime: {task.ProcessedTime}");
-            Console.WriteLine($"Task RequestedTime: {task.RequestedTime}");
-            Console.WriteLine("");
-        }
         public void StartFilesManaging(string path)
         {  //./Tasks.json
             string data = File.ReadAllText(@"" + path);
@@ -45,6 +33,7 @@ namespace Simulator
             this.cpuNumber = int.Parse(root.GetProperty("cpuNumber").ToString());
             this.Tasks = root.GetProperty("Tasks");
         }
+
 
     }
 

@@ -3,19 +3,20 @@ namespace Simulator
     class Scheduler
     {
         public int ClockCycleNow;
-        ProcessorsManager processorsManager;
-        TasksManager tasksManager;
+        ProcessorsManager? processorsManager;
+        TasksManager? tasksManager;
 
-        FilesManager myAdapter;
+        public string[] SimulatorResults = { "--------CPU Simulator--------" };
+
 
         public void IncreaseProcessedTimeForTaskInProcessors()
         {
-            if (processorsManager.busyProcessors.Count > 0)
+            if (processorsManager!.busyProcessors.Count > 0)
             {
                 foreach (int processorsKey in processorsManager.busyProcessors.Keys)
                 {
                     Processor currentProcessor = processorsManager.busyProcessors[processorsKey];
-                    if (tasksManager.IsTaskDone(currentProcessor.CurrentTask!))
+                    if (tasksManager!.IsTaskDone(currentProcessor.CurrentTask!))
                     {
                         RemoveTaskFromProcessor(currentProcessor);
                     }
@@ -40,7 +41,7 @@ namespace Simulator
                 foreach (CPUTask task in AllTasks["high"][currentCycle])
                 {
                     task.State = "waiting";
-                    tasksManager.HighTasksWaiting.Enqueue(task);
+                    tasksManager!.HighTasksWaiting.Enqueue(task);
 
 
 
@@ -53,7 +54,7 @@ namespace Simulator
                 foreach (var task in AllTasks["low"][currentCycle])
                 {
                     task.State = "waiting";
-                    tasksManager.LowTasksWaiting.Enqueue(task);
+                    tasksManager!.LowTasksWaiting.Enqueue(task);
                 }
                 AllTasks["low"].Remove(currentCycle);
             }
@@ -68,7 +69,7 @@ namespace Simulator
 
 
             processor.CurrentTask = null;
-            processorsManager.busyProcessors.Remove(processor.Id);
+            processorsManager!.busyProcessors.Remove(processor.Id);
             processorsManager.idleProcessors.Enqueue(processor);
 
 
@@ -82,16 +83,13 @@ namespace Simulator
                 ""
                 };
 
-            myAdapter.SimulatorResults = myAdapter.SimulatorResults.Concat(NewTaskResults).ToArray();
-
-            myAdapter.PrintResultInCMD(task);
-
+            SimulatorResults = SimulatorResults.Concat(NewTaskResults).ToArray();
         }
 
 
         public void AddTaskToProcessor(CPUTask Task)
         {
-            Processor processor = processorsManager.idleProcessors.Dequeue();
+            Processor processor = processorsManager!.idleProcessors.Dequeue();
             processorsManager.busyProcessors.Add(processor.Id, processor);
 
 
@@ -108,15 +106,15 @@ namespace Simulator
             CPUTask oldTask = processor.CurrentTask!;
 
             processor.CurrentTask = task;
-            tasksManager.InterruptedTasks.Enqueue(oldTask);
+            tasksManager!.InterruptedTasks.Enqueue(oldTask);
         }
 
 
         public void ProcessorsTasksManagement()
         {
-            if (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)
+            if (tasksManager!.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)
             {
-                while ((processorsManager.idleProcessors.Count > 0 && (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)) || (processorsManager.IsThereProcessorWithLowTask() != null && tasksManager.HighTasksWaiting.Count > 0))
+                while ((processorsManager!.idleProcessors.Count > 0 && (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)) || (processorsManager.IsThereProcessorWithLowTask() != null && tasksManager.HighTasksWaiting.Count > 0))
                 {
 
                     if (tasksManager.HighTasksWaiting.Count > 0)
@@ -165,16 +163,14 @@ namespace Simulator
                 this.ProcessorsTasksManagement();
                 this.ClockCycleNow += 1;
             }
-            Console.WriteLine("------------------- TheEnd -------------------");
-            myAdapter.CreateFileWithResults(myAdapter.SimulatorResults);
+            Console.WriteLine("------------------- Simulating is Over -------------------");
         }
 
 
-        public void scheduling(TasksManager tasksManager, ProcessorsManager processorsManager, FilesManager myAdapter)
+        public void scheduling(TasksManager tasksManager, ProcessorsManager processorsManager)
         {
             this.tasksManager = tasksManager;
             this.processorsManager = processorsManager;
-            this.myAdapter = myAdapter;
             this.ClockCycleRunner(this.tasksManager, this.processorsManager);
         }
 

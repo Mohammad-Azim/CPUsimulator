@@ -11,7 +11,9 @@ namespace Simulator
             ProcessorsManager processorsManager = new ProcessorsManager(filesManager.cpuNumber);
 
             Scheduler mySc = new Scheduler();
-            mySc.scheduling(tasksManager, processorsManager, filesManager);
+            mySc.scheduling(tasksManager, processorsManager);
+            filesManager.CreateFileWithResults(mySc.SimulatorResults);
+
         }
     }
 }
