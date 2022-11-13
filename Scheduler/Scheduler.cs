@@ -170,12 +170,13 @@ namespace Simulator
         }
 
 
-        public Scheduler(TasksManager tasksManager, ProcessorsManager processorsManager, FilesManager myAdapter)
+        public void scheduling(TasksManager tasksManager, ProcessorsManager processorsManager, FilesManager myAdapter)
         {
             this.tasksManager = tasksManager;
             this.processorsManager = processorsManager;
             this.myAdapter = myAdapter;
             this.ClockCycleRunner(this.tasksManager, this.processorsManager);
         }
+
     }
 }

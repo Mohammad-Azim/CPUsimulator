@@ -35,7 +35,7 @@ namespace Simulator
             Console.WriteLine($"Task RequestedTime: {task.RequestedTime}");
             Console.WriteLine("");
         }
-        public FilesManager(string path)
+        public void StartFilesManaging(string path)
         {  //./Tasks.json
             string data = File.ReadAllText(@"" + path);
 

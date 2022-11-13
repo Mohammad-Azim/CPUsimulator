@@ -7,14 +7,12 @@ namespace Simulator
     public class FilesManagerTests
     {
 
-
-
-        [Fact]
-        public void testStartReading()
-        {
-            FilesManager myFileManager = new FilesManager("../../../Tests/TestTasks.json");
-            Assert.Equal(2, myFileManager.cpuNumber);
-        }
+        // [Fact]
+        // public void testStartReading()
+        // {
+        //     FilesManager myFileManager = new FilesManager("../../../Tests/TestTasks.json");
+        //     Assert.Equal(2, myFileManager.cpuNumber);
+        // }
 
     }
 
