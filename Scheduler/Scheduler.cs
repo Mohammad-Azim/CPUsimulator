@@ -3,12 +3,10 @@ namespace Simulator
     class Scheduler
     {
         public int ClockCycleNow;
-        public ProcessorsManager processorsManager = new ProcessorsManager();
+        ProcessorsManager processorsManager;
+        TasksManager tasksManager;
 
-        public TasksManager tasksManager = new TasksManager();
-
-        FilesManager myAdapter = new FilesManager();
-
+        FilesManager myAdapter;
 
         public void IncreaseProcessedTimeForTaskInProcessors()
         {
@@ -28,7 +26,6 @@ namespace Simulator
                 }
             }
         }
-
 
         public void SetTasksToWaitingBasedOnPriority(Dictionary<string, Dictionary<int, List<CPUTask>>> AllTasks)
         {
@@ -157,27 +154,28 @@ namespace Simulator
         }
 
 
-        public void ClockCycleRunner(FilesManager JsonAdapter)
+        public void ClockCycleRunner(TasksManager tasksManager, ProcessorsManager processorsManager)
         {
-            processorsManager.CreateProcessors(JsonAdapter.cpuNumber);
+            // processorsManager.CreateProcessors(JsonAdapter.cpuNumber);
 
-            while (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0 || tasksManager.IsThereTaskInDictionary(JsonAdapter) || processorsManager.busyProcessors.Count > 0)
+            while (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0 || tasksManager.IsThereTaskInDictionary(tasksManager.AllDicTasks) || processorsManager.busyProcessors.Count > 0)
             {
                 this.IncreaseProcessedTimeForTaskInProcessors();
-                this.SetTasksToWaitingBasedOnPriority(JsonAdapter.AllDicTasks!);
+                this.SetTasksToWaitingBasedOnPriority(tasksManager.AllDicTasks!);
                 this.ProcessorsTasksManagement();
                 this.ClockCycleNow += 1;
             }
             Console.WriteLine("------------------- TheEnd -------------------");
-            JsonAdapter.PrintResultToFile(myAdapter.SimulatorResults);
+            myAdapter.PrintResultToFile(myAdapter.SimulatorResults);
         }
 
 
-        public Scheduler(string path)
+        public Scheduler(TasksManager tasksManager, ProcessorsManager processorsManager, FilesManager myAdapter)
         {
-            myAdapter.StartReading(path);
-            this.ClockCycleRunner(myAdapter);
-
+            this.tasksManager = tasksManager;
+            this.processorsManager = processorsManager;
+            this.myAdapter = myAdapter;
+            this.ClockCycleRunner(this.tasksManager, this.processorsManager);
         }
     }
 }

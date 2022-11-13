@@ -34,5 +34,10 @@ namespace Simulator
             }
             return null;
         }
+
+        public ProcessorsManager(int cpuNumber)
+        {
+            this.CreateProcessors(cpuNumber);
+        }
     }
 }

@@ -5,8 +5,11 @@ namespace Simulator
     {
         static void Main()
         {
-            Scheduler mySc = new Scheduler("./Tasks.json");
-            // Scheduler mySc2 = new Scheduler("./Tasks.json");
+            FilesManager filesManager = new FilesManager("./Tasks.json");
+            TasksManager tasksManager = new TasksManager(filesManager.Tasks);
+            ProcessorsManager processorsManager = new ProcessorsManager(filesManager.cpuNumber);
+            Scheduler mySc = new Scheduler(tasksManager, processorsManager, filesManager);
+
         }
     }
 }
