@@ -13,16 +13,18 @@ namespace Simulator
         {
             if (processorsManager!.busyProcessors.Count > 0)
             {
-                foreach (int processorsKey in processorsManager.busyProcessors.Keys)
+                List<Processor> busy = new List<Processor>();
+                busy.AddRange(processorsManager.busyProcessors);
+
+                foreach (Processor processors in busy)
                 {
-                    Processor currentProcessor = processorsManager.busyProcessors[processorsKey];
-                    if (tasksManager!.IsTaskDone(currentProcessor.CurrentTask!))
+                    if (tasksManager!.IsTaskDone(processors.CurrentTask!))
                     {
-                        RemoveTaskFromProcessor(currentProcessor);
+                        RemoveTaskFromProcessor(processors);
                     }
                     else
                     {
-                        currentProcessor.CurrentTask!.ProcessedTime += 1;
+                        processors.CurrentTask!.ProcessedTime += 1;
                     }
                 }
             }
@@ -68,8 +70,8 @@ namespace Simulator
 
 
             processor.CurrentTask = null;
-            processorsManager!.busyProcessors.Remove(processor.Id);
-            processorsManager.idleProcessors.Enqueue(processor);
+            processorsManager!.busyProcessors.Remove(processor);
+            processorsManager.idleProcessors.Add(processor);
 
 
             string[] NewTaskResults = {
@@ -88,9 +90,9 @@ namespace Simulator
 
         public void AddTaskToProcessor(CPUTask Task)
         {
-            Processor processor = processorsManager!.idleProcessors.Dequeue();
-            processorsManager.busyProcessors.Add(processor.Id, processor);
-
+            Processor processor = this.processorsManager!.idleProcessors[0];
+            processorsManager!.busyProcessors.Add(processor);
+            processorsManager.idleProcessors.Remove(processor);
 
             processor.CurrentTask = Task;
             processor.state = "busy";

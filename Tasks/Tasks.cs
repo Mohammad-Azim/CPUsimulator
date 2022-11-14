@@ -10,10 +10,10 @@ namespace Simulator
 
         //  the below can be modified
         public int CreationTime { get; set; }
-        public string? State { get; set; }
-        public int CompletionTime { get; set; }
+        public string? State { get; set; } = "waiting";
+        public int CompletionTime { get; set; } = 0;
 
-        public int ProcessedTime { get; set; }
+        public int ProcessedTime { get; set; } = 0;
 
     }
 }

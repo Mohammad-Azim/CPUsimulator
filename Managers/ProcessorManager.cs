@@ -2,8 +2,8 @@ namespace Simulator
 {
     class ProcessorsManager
     {
-        public Queue<Processor> idleProcessors = new Queue<Processor>();
-        public Dictionary<int, Processor> busyProcessors = new Dictionary<int, Processor>();
+        public List<Processor> idleProcessors = new List<Processor>();
+        public List<Processor> busyProcessors = new List<Processor>();
 
 
         public void CreateProcessors(int ProcessorsNumber)
@@ -16,21 +16,20 @@ namespace Simulator
                 NewProcessor.state = "idle";
                 NewProcessor.CurrentTask = null;
 
-                this.idleProcessors.Enqueue(NewProcessor);
+                this.idleProcessors.Add(NewProcessor);
             }
         }
 
         public Processor? IsThereProcessorWithLowTask()
         {
-            foreach (int processorsKey in this.busyProcessors.Keys)
+            foreach (Processor processors in this.busyProcessors)
             {
-                Processor currentProcessor = this.busyProcessors[processorsKey];
+                Processor currentProcessor = processors;
 
                 if (currentProcessor.CurrentTask!.Priority == "low")
                 {
                     return currentProcessor;
                 }
-
             }
             return null;
         }
