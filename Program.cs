@@ -12,7 +12,7 @@ namespace Simulator
 
             Scheduler mySc = new Scheduler();
             mySc.scheduling(tasksManager, processorsManager);
-            filesManager.CreateFileWithResults(mySc.SimulatorResults);
+            filesManager.CreateFileWithResults(mySc.SimulatorData);
 
         }
     }

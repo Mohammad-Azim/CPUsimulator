@@ -17,7 +17,7 @@ namespace Simulator
         }
 
 
-        public void ConvertToTask(List<CPUTask>? json_Tasks)
+        public void SetAllTasks(List<CPUTask>? json_Tasks)
         {
 
             for (int x = 0; x < json_Tasks?.Count; x++)
@@ -42,7 +42,7 @@ namespace Simulator
 
         public TasksManager(List<CPUTask> json_Tasks)
         {
-            this.ConvertToTask(json_Tasks);
+            this.SetAllTasks(json_Tasks);
 
         }
     }
