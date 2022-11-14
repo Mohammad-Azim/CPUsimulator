@@ -28,36 +28,35 @@ namespace Simulator
             }
         }
 
-        public void SetTasksToWaitingBasedOnPriority(Dictionary<string, Dictionary<int, List<CPUTask>>> AllTasks)
+        //SetTasksToWaitingPriorityQueue
+        public void SetTasksToWaitingBasedOnPriority()
         {
             // Call every cycle
 
             int currentCycle = this.ClockCycleNow;
 
-
-            if (AllTasks["high"].ContainsKey(currentCycle))
+            while (tasksManager!.AllTasksList.Count > 0)
             {
+                CPUTask currentTask = tasksManager.AllTasksList[0];
+                int lowOrHigh = 1;
 
-                foreach (CPUTask task in AllTasks["high"][currentCycle])
+                if (currentTask.CreationTime > currentCycle)
                 {
-                    task.State = "waiting";
-                    tasksManager!.HighTasksWaiting.Enqueue(task);
-
-
-
+                    break;
                 }
-                AllTasks["high"].Remove(currentCycle);
+
+                if (currentTask.Priority == "high")
+                {
+                    lowOrHigh = 0;
+                }
+                tasksManager.WaitingPriorityQueue.Enqueue(tasksManager.AllTasksList[0], lowOrHigh);
+                tasksManager.AllTasksList.Remove(currentTask);
+                // Console.WriteLine($"add a new task to waiting Id: {currentTask.Id}");
+                // Console.WriteLine($"Priority quuuu: {tasksManager.WaitingPriorityQueue.Peek()}");
+
             }
 
-            if (AllTasks["low"].ContainsKey(currentCycle))
-            {
-                foreach (var task in AllTasks["low"][currentCycle])
-                {
-                    task.State = "waiting";
-                    tasksManager!.LowTasksWaiting.Enqueue(task);
-                }
-                AllTasks["low"].Remove(currentCycle);
-            }
+
         }
 
         public void RemoveTaskFromProcessor(Processor processor)
@@ -97,7 +96,6 @@ namespace Simulator
             processor.state = "busy";
 
             Task.State = "executing";
-            Task.CreationTime = this.ClockCycleNow;
         }
 
 
@@ -106,48 +104,74 @@ namespace Simulator
             CPUTask oldTask = processor.CurrentTask!;
 
             processor.CurrentTask = task;
-            tasksManager!.InterruptedTasks.Enqueue(oldTask);
+            // always one because we only interrupt low tasks
+            tasksManager!.WaitingPriorityQueue.Enqueue(oldTask, 1);
         }
 
 
         public void ProcessorsTasksManagement()
         {
-            if (tasksManager!.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)
+
+            if (tasksManager!.WaitingPriorityQueue.Count > 0)
             {
-                while ((processorsManager!.idleProcessors.Count > 0 && (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)) || (processorsManager.IsThereProcessorWithLowTask() != null && tasksManager.HighTasksWaiting.Count > 0))
+
+                while ((processorsManager!.idleProcessors.Count > 0 && tasksManager.WaitingPriorityQueue.Count > 0))
                 {
-                    if (tasksManager.HighTasksWaiting.Count > 0)
+                    Console.WriteLine($"cont {tasksManager.WaitingPriorityQueue.Count}");
+                    if (processorsManager.idleProcessors.Count > 0 && tasksManager.WaitingPriorityQueue.Count > 0)
+                    {
+
+                        CPUTask task = tasksManager.WaitingPriorityQueue.Dequeue();
+                        this.AddTaskToProcessor(task);
+                    }
+                    else if (processorsManager.idleProcessors.Count == 0 && tasksManager.WaitingPriorityQueue.Count > 0 && tasksManager.WaitingPriorityQueue.Peek().Priority == "high")
                     {
                         var ProcessorWithLowTask = processorsManager.IsThereProcessorWithLowTask();
-
-                        if (processorsManager.idleProcessors.Count > 0)
+                        if (ProcessorWithLowTask != null)
                         {
-                            CPUTask task = tasksManager.HighTasksWaiting.Dequeue();
-                            this.AddTaskToProcessor(task);
-                        }
-                        else if (ProcessorWithLowTask != null)
-                        {
-                            CPUTask task = tasksManager.HighTasksWaiting.Dequeue();
+                            CPUTask task = tasksManager.WaitingPriorityQueue.Dequeue();
                             this.AddTaskToBusyProcessor(ProcessorWithLowTask, task);
                         }
                     }
-                    else if (processorsManager.idleProcessors.Count > 0)
-                    {
 
-                        if (tasksManager.InterruptedTasks.Count > 0)
-                        {
-
-                            CPUTask task = tasksManager.InterruptedTasks.Dequeue();
-                            this.AddTaskToProcessor(task);
-                        }
-                        else if (tasksManager.LowTasksWaiting.Count > 0)
-                        {
-                            CPUTask task = tasksManager.LowTasksWaiting.Dequeue();
-                            this.AddTaskToProcessor(task);
-                        }
-                    }
                 }
             }
+            // if (tasksManager!.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)
+            // {
+            //     while ((processorsManager!.idleProcessors.Count > 0 && (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)) || (processorsManager.IsThereProcessorWithLowTask() != null && tasksManager.HighTasksWaiting.Count > 0))
+            //     {
+            //         if (tasksManager.HighTasksWaiting.Count > 0)
+            //         {
+            //             var ProcessorWithLowTask = processorsManager.IsThereProcessorWithLowTask();
+
+            //             if (processorsManager.idleProcessors.Count > 0)
+            //             {
+            //                 CPUTask task = tasksManager.HighTasksWaiting.Dequeue();
+            //                 this.AddTaskToProcessor(task);
+            //             }
+            //             else if (ProcessorWithLowTask != null)
+            //             {
+            //                 CPUTask task = tasksManager.HighTasksWaiting.Dequeue();
+            //                 this.AddTaskToBusyProcessor(ProcessorWithLowTask, task);
+            //             }
+            //         }
+            //         else if (processorsManager.idleProcessors.Count > 0)
+            //         {
+
+            //             if (tasksManager.InterruptedTasks.Count > 0)
+            //             {
+
+            //                 CPUTask task = tasksManager.InterruptedTasks.Dequeue();
+            //                 this.AddTaskToProcessor(task);
+            //             }
+            //             else if (tasksManager.LowTasksWaiting.Count > 0)
+            //             {
+            //                 CPUTask task = tasksManager.LowTasksWaiting.Dequeue();
+            //                 this.AddTaskToProcessor(task);
+            //             }
+            //         }
+            //     }
+            // }
         }
 
 
@@ -155,10 +179,10 @@ namespace Simulator
         {
             // processorsManager.CreateProcessors(JsonAdapter.cpuNumber);
 
-            while (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0 || tasksManager.IsThereTaskInDictionary(tasksManager.AllDicTasks) || processorsManager.busyProcessors.Count > 0)
+            while (tasksManager.WaitingPriorityQueue.Count > 0 || tasksManager.AllTasksList.Count > 0 || processorsManager.busyProcessors.Count > 0)
             {
                 this.IncreaseProcessedTimeForTaskInProcessors();
-                this.SetTasksToWaitingBasedOnPriority(tasksManager.AllDicTasks!);
+                this.SetTasksToWaitingBasedOnPriority();
                 this.ProcessorsTasksManagement();
                 this.ClockCycleNow += 1;
             }
