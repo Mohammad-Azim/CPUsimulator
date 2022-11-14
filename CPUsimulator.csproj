@@ -7,8 +7,6 @@
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Json.Net" Version="1.0.33"/>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2"/>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0"/>
     <PackageReference Include="xunit" Version="2.4.2"/>
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5"/>

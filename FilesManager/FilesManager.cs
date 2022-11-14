@@ -9,15 +9,15 @@ namespace Simulator
     {
 
         public int cpuNumber { get; set; }
-        public JsonElement Tasks { get; set; }
+        public List<CPUTask>? Tasks { get; set; }
         // public Dictionary<string, Dictionary<int, List<CPUTask>>>? AllDicTasks { get; set; }
 
         public string[] SimulatorResults = { "--------CPU Simulator--------" };
 
         public void CreateFileWithResults(string[] lines)
         {
-            string datee = DateTime.Now.ToString("yyyyMMddHHmmss");
-            var myUniqueFileName = $@"./FilesManager/results({datee}).txt";
+            string date = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var myUniqueFileName = $@"./FilesManager/results({date}).txt";
 
 
             File.WriteAllLinesAsync(myUniqueFileName, lines);
@@ -25,13 +25,11 @@ namespace Simulator
 
         public void StartFilesManaging(string path)
         {  //./Tasks.json
-            string data = File.ReadAllText(@"" + path);
-
-            JsonDocument doc = JsonDocument.Parse(data);
-            JsonElement root = doc.RootElement;
-
-            this.cpuNumber = int.Parse(root.GetProperty("cpuNumber").ToString());
-            this.Tasks = root.GetProperty("Tasks");
+            string jsonString = File.ReadAllText(@"" + path);
+            FilesManager? filesManager =
+               JsonSerializer.Deserialize<FilesManager>(jsonString);
+            this.cpuNumber = filesManager!.cpuNumber;
+            this.Tasks = filesManager.Tasks;
         }
 
 

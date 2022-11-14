@@ -13,7 +13,6 @@
 /home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/ref/CPUsimulator.dll
 /home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.pdb
 /home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.genruntimeconfig.cache
-/home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/Json.Net.dll
 /home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/Newtonsoft.Json.dll
 /home/mohammad/CSharp/CPUsimulator/obj/Debug/net6.0/CPUsimulator.csproj.CopyComplete
 /home/mohammad/CSharp/CPUsimulator/bin/Debug/net6.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll

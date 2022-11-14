@@ -116,7 +116,6 @@ namespace Simulator
             {
                 while ((processorsManager!.idleProcessors.Count > 0 && (tasksManager.HighTasksWaiting.Count > 0 || tasksManager.LowTasksWaiting.Count > 0 || tasksManager.InterruptedTasks.Count > 0)) || (processorsManager.IsThereProcessorWithLowTask() != null && tasksManager.HighTasksWaiting.Count > 0))
                 {
-
                     if (tasksManager.HighTasksWaiting.Count > 0)
                     {
                         var ProcessorWithLowTask = processorsManager.IsThereProcessorWithLowTask();

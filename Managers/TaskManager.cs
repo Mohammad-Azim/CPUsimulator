@@ -1,4 +1,3 @@
-using System.Text.Json;
 
 namespace Simulator
 {
@@ -25,10 +24,9 @@ namespace Simulator
         }
 
 
-
-
-        public Dictionary<string, Dictionary<int, List<CPUTask>>> ConvertToTask(JsonElement json_Tasks)
+        public Dictionary<string, Dictionary<int, List<CPUTask>>> ConvertToTask(List<CPUTask>? json_Tasks)
         {
+
 
             Dictionary<string, Dictionary<int, List<CPUTask>>> All_Tasks = new Dictionary<string, Dictionary<int, List<CPUTask>>>();
             Dictionary<int, List<CPUTask>> high_tasks = new Dictionary<int, List<CPUTask>>();
@@ -37,15 +35,15 @@ namespace Simulator
             All_Tasks.Add("high", high_tasks);
             All_Tasks.Add("low", low_tasks);
 
-            for (int x = 0; x < json_Tasks.GetArrayLength(); x++)
+            for (int x = 0; x < json_Tasks?.Count; x++)
             {
                 var currentTask = json_Tasks[x];
                 CPUTask NewTask = new CPUTask
                 {
-                    Id = currentTask.GetProperty("id").ToString(),
-                    CreationTime = Int32.Parse(currentTask.GetProperty("CreationTime").ToString()),
-                    RequestedTime = Int32.Parse(currentTask.GetProperty("RequestedTime").ToString()),
-                    Priority = currentTask.GetProperty("Priority").ToString(),
+                    Id = currentTask.Id?.ToString(),
+                    CreationTime = Int32.Parse(currentTask.CreationTime.ToString()),
+                    RequestedTime = Int32.Parse(currentTask.RequestedTime.ToString()),
+                    Priority = currentTask.Priority?.ToString(),
                     CompletionTime = 0,
                     State = "waiting",
                     ProcessedTime = 0
@@ -87,9 +85,10 @@ namespace Simulator
             return All_Tasks;
         }
 
-        public TasksManager(JsonElement json_Tasks)
+        public TasksManager(List<CPUTask> json_Tasks)
         {
             this.ConvertToTask(json_Tasks);
+
         }
     }
 
