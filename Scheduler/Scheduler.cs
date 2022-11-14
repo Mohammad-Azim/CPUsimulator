@@ -47,15 +47,12 @@ namespace Simulator
                     break;
                 }
 
-                if (currentTask.Priority == "high")
+                if (currentTask.Priority == AllEnum.Priority.high)
                 {
                     lowOrHigh = 0;
                 }
                 tasksManager.WaitingPriorityQueue.Enqueue(tasksManager.AllTasksList[0], lowOrHigh);
                 tasksManager.AllTasksList.Remove(currentTask);
-                // Console.WriteLine($"add a new task to waiting Id: {currentTask.Id}");
-                // Console.WriteLine($"Priority quuuu: {tasksManager.WaitingPriorityQueue.Peek()}");
-
             }
 
 
@@ -65,7 +62,7 @@ namespace Simulator
         {
             CPUTask task = processor.CurrentTask!;
 
-            task.State = "completed";
+            task.State = AllEnum.TaskState.completed;
             task.CompletionTime = this.ClockCycleNow;
 
 
@@ -95,9 +92,9 @@ namespace Simulator
             processorsManager.idleProcessors.Remove(processor);
 
             processor.CurrentTask = Task;
-            processor.state = "busy";
+            processor.state = AllEnum.state.busy;
 
-            Task.State = "executing";
+            Task.State = AllEnum.TaskState.executing;
         }
 
 
@@ -125,7 +122,7 @@ namespace Simulator
                         CPUTask task = tasksManager.WaitingPriorityQueue.Dequeue();
                         this.AddTaskToProcessor(task);
                     }
-                    else if (processorsManager.idleProcessors.Count == 0 && tasksManager.WaitingPriorityQueue.Count > 0 && tasksManager.WaitingPriorityQueue.Peek().Priority == "high")
+                    else if (processorsManager.idleProcessors.Count == 0 && tasksManager.WaitingPriorityQueue.Count > 0 && tasksManager.WaitingPriorityQueue.Peek().Priority == AllEnum.Priority.high)
                     {
                         var ProcessorWithLowTask = processorsManager.IsThereProcessorWithLowTask();
                         if (ProcessorWithLowTask != null)
