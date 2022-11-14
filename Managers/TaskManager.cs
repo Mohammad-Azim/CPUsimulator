@@ -1,8 +1,6 @@
 
 namespace Simulator
 {
-
-
     class TasksManager
     {
 
@@ -17,13 +15,13 @@ namespace Simulator
         }
 
 
-        public void SetAllTasks(List<CPUTask>? json_Tasks)
+        public void SetAllTasks(List<CPUTask>? TasksList)
         {
 
-            for (int x = 0; x < json_Tasks?.Count; x++)
+            for (int x = 0; x < TasksList?.Count; x++)
             {
 
-                var currentTask = json_Tasks[x];
+                var currentTask = TasksList[x];
                 CPUTask NewTask = new CPUTask
                 {
                     Id = currentTask.Id?.ToString(),
@@ -40,9 +38,9 @@ namespace Simulator
             AllTasksList.Sort((x, y) => x.CreationTime.CompareTo(y.CreationTime));
         }
 
-        public TasksManager(List<CPUTask> json_Tasks)
+        public TasksManager(List<CPUTask> TasksList)
         {
-            this.SetAllTasks(json_Tasks);
+            this.SetAllTasks(TasksList);
 
         }
     }

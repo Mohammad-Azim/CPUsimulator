@@ -2,35 +2,35 @@
   "cpuNumber": 2,
   "Tasks": [
     {
-      "id": 1,
+      "Id": "1",
       "CreationTime": 0,
       "RequestedTime": 9,
       "Priority": "low",
-      "CompletionTime": null,
+      "CompletionTime": 0,
       "State": null
     },
     {
-      "id": 2,
+      "Id": "2",
       "CreationTime": 3,
       "RequestedTime": 3,
       "Priority": "high",
-      "CompletionTime": null,
+      "CompletionTime": 0,
       "State": null
     },
     {
-      "id": 3,
+      "Id": "3",
       "CreationTime": 4,
       "RequestedTime": 3,
       "Priority": "high",
-      "CompletionTime": null,
+      "CompletionTime": 0,
       "State": null
     },
     {
-      "id": 4,
-      "CreationTime": 7,
+      "Id": "4",
+      "CreationTime": 1,
       "RequestedTime": 3,
       "Priority": "high",
-      "CompletionTime": null,
+      "CompletionTime": 0,
       "State": null
     }
   ]

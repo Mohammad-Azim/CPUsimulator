@@ -138,11 +138,11 @@ namespace Simulator
         }
 
 
-        public void ClockCycleRunner(TasksManager tasksManager, ProcessorsManager processorsManager)
+        public void ClockCycleRunner()
         {
             // processorsManager.CreateProcessors(JsonAdapter.cpuNumber);
 
-            while (tasksManager.WaitingPriorityQueue.Count > 0 || tasksManager.AllTasksList.Count > 0 || processorsManager.busyProcessors.Count > 0)
+            while (tasksManager!.WaitingPriorityQueue.Count > 0 || tasksManager.AllTasksList.Count > 0 || processorsManager!.busyProcessors.Count > 0)
             {
                 this.IncreaseProcessedTimeForTaskInProcessors();
                 this.SetTasksToWaitingPriorityQueue();
@@ -157,7 +157,7 @@ namespace Simulator
         {
             this.tasksManager = tasksManager;
             this.processorsManager = processorsManager;
-            this.ClockCycleRunner(this.tasksManager, this.processorsManager);
+            this.ClockCycleRunner();
         }
 
     }

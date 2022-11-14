@@ -18,8 +18,6 @@ namespace Simulator
         {
             string date = DateTime.Now.ToString("yyyyMMddHHmmss");
             var myUniqueFileName = $@"./FilesManager/results({date}).txt";
-
-
             File.WriteAllLinesAsync(myUniqueFileName, lines);
         }
 
