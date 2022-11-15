@@ -131,9 +131,9 @@ namespace Simulator
         {
             while (tasksManager!.WaitingPriorityQueue.Count > 0 || tasksManager.AllTasksList.Count > 0 || processorsManager!.busyProcessors.Count > 0)
             {
-                this.IncreaseProcessedTimeForTaskInProcessors();
                 this.SetTasksToWaitingPriorityQueue();
                 this.ProcessorsTasksManagement();
+                this.IncreaseProcessedTimeForTaskInProcessors();
                 this.ClockCycleNow += 1;
             }
             Console.WriteLine("------------------- Simulating is Over -------------------");
