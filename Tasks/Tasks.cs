@@ -13,9 +13,9 @@ namespace Simulator
 
         public int ProcessedTime { get; set; } = 0;
 
-        public AllEnum.Priority Priority;
+        public TaskPriority Priority;
 
-        public AllEnum.TaskState State;
+        public TaskState State;
 
 
     }

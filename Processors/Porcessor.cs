@@ -4,7 +4,7 @@ namespace Simulator
     record Processor
     {
         public int Id;
-        public AllEnum.state state;
+        public ProcessorState state;
 
         public CPUTask? CurrentTask;
     }

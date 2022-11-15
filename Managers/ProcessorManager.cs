@@ -13,7 +13,7 @@ namespace Simulator
                 Processor NewProcessor = new Processor();
 
                 NewProcessor.Id = x;
-                NewProcessor.state = AllEnum.state.idle;
+                NewProcessor.state = ProcessorState.idle;
                 NewProcessor.CurrentTask = null;
 
                 this.idleProcessors.Add(NewProcessor);
@@ -24,11 +24,9 @@ namespace Simulator
         {
             foreach (Processor processors in this.busyProcessors)
             {
-                Processor currentProcessor = processors;
-
-                if (currentProcessor.CurrentTask!.Priority == AllEnum.Priority.low)
+                if (processors.CurrentTask!.Priority == TaskPriority.low)
                 {
-                    return currentProcessor;
+                    return processors;
                 }
             }
             return null;

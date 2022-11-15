@@ -30,28 +30,21 @@ namespace Simulator
             }
         }
 
-        //SetTasksToWaitingPriorityQueue
         public void SetTasksToWaitingPriorityQueue()
         {
             // Call every cycle
-
             int currentCycle = this.ClockCycleNow;
+
 
             while (tasksManager!.AllTasksList.Count > 0)
             {
                 CPUTask currentTask = tasksManager.AllTasksList[0];
-                int lowOrHigh = 1;
-
                 if (currentTask.CreationTime > currentCycle)
                 {
                     break;
                 }
-
-                if (currentTask.Priority == AllEnum.Priority.high)
-                {
-                    lowOrHigh = 0;
-                }
-                tasksManager.WaitingPriorityQueue.Enqueue(tasksManager.AllTasksList[0], lowOrHigh);
+                TaskPriority currentPriority = currentTask.Priority == TaskPriority.high ? TaskPriority.high : TaskPriority.low;
+                tasksManager.WaitingPriorityQueue.Enqueue(tasksManager.AllTasksList[0], currentPriority);
                 tasksManager.AllTasksList.Remove(currentTask);
             }
 
@@ -62,7 +55,7 @@ namespace Simulator
         {
             CPUTask task = processor.CurrentTask!;
 
-            task.State = AllEnum.TaskState.completed;
+            task.State = TaskState.completed;
             task.CompletionTime = this.ClockCycleNow;
 
 
@@ -92,9 +85,9 @@ namespace Simulator
             processorsManager.idleProcessors.Remove(processor);
 
             processor.CurrentTask = Task;
-            processor.state = AllEnum.state.busy;
+            processor.state = ProcessorState.busy;
 
-            Task.State = AllEnum.TaskState.executing;
+            Task.State = TaskState.executing;
         }
 
 
@@ -104,22 +97,24 @@ namespace Simulator
 
             processor.CurrentTask = task;
             // always one because we only interrupt low tasks
-            tasksManager!.WaitingPriorityQueue.Enqueue(oldTask, 1);
+            tasksManager!.WaitingPriorityQueue.Enqueue(oldTask, TaskPriority.low);
         }
 
 
         public void ProcessorsTasksManagement()
         {
 
-            while (tasksManager!.WaitingPriorityQueue.Count > 0)
+            while (tasksManager!.WaitingPriorityQueue.Count > 0 && processorsManager!.idleProcessors.Count > 0 || (processorsManager!.GetProcessorWithLowTask() != null && tasksManager.WaitingPriorityQueue.Peek().Priority == TaskPriority.high))
             {
                 if (processorsManager!.idleProcessors.Count > 0)
                 {
                     CPUTask task = tasksManager.WaitingPriorityQueue.Dequeue();
                     this.AddTaskToProcessor(task);
                 }
-                else if (tasksManager.WaitingPriorityQueue.Peek().Priority == AllEnum.Priority.high)
+                else if (tasksManager.WaitingPriorityQueue.Peek().Priority == TaskPriority.high)
                 {
+                    Console.WriteLine(tasksManager.WaitingPriorityQueue.Peek());
+
                     var ProcessorWithLowTask = processorsManager.GetProcessorWithLowTask();
                     if (ProcessorWithLowTask != null)
                     {
@@ -134,10 +129,9 @@ namespace Simulator
 
         public void ClockCycleRunner()
         {
-            // processorsManager.CreateProcessors(JsonAdapter.cpuNumber);
-
             while (tasksManager!.WaitingPriorityQueue.Count > 0 || tasksManager.AllTasksList.Count > 0 || processorsManager!.busyProcessors.Count > 0)
             {
+                Console.WriteLine(tasksManager!.WaitingPriorityQueue.Count);
                 this.IncreaseProcessedTimeForTaskInProcessors();
                 this.SetTasksToWaitingPriorityQueue();
                 this.ProcessorsTasksManagement();

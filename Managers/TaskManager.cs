@@ -5,7 +5,7 @@ namespace Simulator
     {
 
         public List<CPUTask> AllTasksList = new List<CPUTask>();
-        public PriorityQueue<CPUTask, int> WaitingPriorityQueue = new PriorityQueue<CPUTask, int>();
+        public PriorityQueue<CPUTask, TaskPriority> WaitingPriorityQueue = new PriorityQueue<CPUTask, TaskPriority>();
 
 
         public bool IsTaskDone(CPUTask task)
