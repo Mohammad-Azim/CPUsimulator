@@ -6,32 +6,28 @@
       "CreationTime": 0,
       "RequestedTime": 9,
       "Priority": "low",
-      "CompletionTime": 0,
-      "State": null
+      "CompletionTime": 0
     },
     {
       "Id": "2",
       "CreationTime": 3,
       "RequestedTime": 3,
       "Priority": "high",
-      "CompletionTime": 0,
-      "State": null
+      "CompletionTime": 0
     },
     {
       "Id": "3",
       "CreationTime": 4,
       "RequestedTime": 3,
       "Priority": "high",
-      "CompletionTime": 0,
-      "State": null
+      "CompletionTime": 0
     },
     {
       "Id": "4",
       "CreationTime": 1,
       "RequestedTime": 3,
       "Priority": "high",
-      "CompletionTime": 0,
-      "State": null
+      "CompletionTime": 0
     }
   ]
 }
