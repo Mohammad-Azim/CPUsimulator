@@ -1,0 +1,37 @@
+--------CPU Simulator--------
+New Task Finished
+task Id: 4
+Task State: completed
+Task CreationTime: 1
+Task CompletionTime: 5
+Task ProcessedTime: 3
+Task RequestedTime: 3
+Task Priority: high
+
+New Task Finished
+task Id: 2
+Task State: completed
+Task CreationTime: 3
+Task CompletionTime: 7
+Task ProcessedTime: 3
+Task RequestedTime: 3
+Task Priority: high
+
+New Task Finished
+task Id: 3
+Task State: completed
+Task CreationTime: 4
+Task CompletionTime: 9
+Task ProcessedTime: 3
+Task RequestedTime: 3
+Task Priority: high
+
+New Task Finished
+task Id: 1
+Task State: completed
+Task CreationTime: 0
+Task CompletionTime: 14
+Task ProcessedTime: 9
+Task RequestedTime: 9
+Task Priority: low
+

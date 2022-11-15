@@ -1,3 +1,5 @@
+
+
 namespace Simulator
 {
 
@@ -15,7 +17,7 @@ namespace Simulator
 
         public TaskPriority Priority;
 
-        public TaskState State;
+        public TaskState State = TaskState.waiting;
 
 
     }

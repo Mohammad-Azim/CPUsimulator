@@ -2,7 +2,7 @@ namespace Simulator
 {
     class Scheduler
     {
-        public int ClockCycleNow;
+        public int ClockCycleNow = 0;
         ProcessorsManager? processorsManager;
         TasksManager? tasksManager;
 
@@ -43,6 +43,7 @@ namespace Simulator
                 {
                     break;
                 }
+
                 TaskPriority currentPriority = currentTask.Priority == TaskPriority.high ? TaskPriority.high : TaskPriority.low;
                 tasksManager.WaitingPriorityQueue.Enqueue(tasksManager.AllTasksList[0], currentPriority);
                 tasksManager.AllTasksList.Remove(currentTask);
@@ -71,6 +72,7 @@ namespace Simulator
                 $"Task CompletionTime: {task.CompletionTime}",
                 $"Task ProcessedTime: {task.ProcessedTime}",
                 $"Task RequestedTime: {task.RequestedTime}",
+                $"Task Priority: {task.Priority}",
                 ""
                 };
 
@@ -96,7 +98,7 @@ namespace Simulator
             CPUTask oldTask = processor.CurrentTask!;
 
             processor.CurrentTask = task;
-            // always one because we only interrupt low tasks
+            // always low because we only interrupt low tasks
             tasksManager!.WaitingPriorityQueue.Enqueue(oldTask, TaskPriority.low);
         }
 
@@ -104,17 +106,15 @@ namespace Simulator
         public void ProcessorsTasksManagement()
         {
 
-            while (tasksManager!.WaitingPriorityQueue.Count > 0 && processorsManager!.idleProcessors.Count > 0 || (processorsManager!.GetProcessorWithLowTask() != null && tasksManager.WaitingPriorityQueue.Peek().Priority == TaskPriority.high))
+            while (tasksManager!.WaitingPriorityQueue.Count > 0 && (processorsManager!.idleProcessors.Count > 0 || processorsManager!.GetProcessorWithLowTask() != null && tasksManager.WaitingPriorityQueue.Peek().Priority == TaskPriority.high))
             {
                 if (processorsManager!.idleProcessors.Count > 0)
                 {
                     CPUTask task = tasksManager.WaitingPriorityQueue.Dequeue();
                     this.AddTaskToProcessor(task);
                 }
-                else if (tasksManager.WaitingPriorityQueue.Peek().Priority == TaskPriority.high)
+                else
                 {
-                    Console.WriteLine(tasksManager.WaitingPriorityQueue.Peek());
-
                     var ProcessorWithLowTask = processorsManager.GetProcessorWithLowTask();
                     if (ProcessorWithLowTask != null)
                     {
@@ -131,7 +131,6 @@ namespace Simulator
         {
             while (tasksManager!.WaitingPriorityQueue.Count > 0 || tasksManager.AllTasksList.Count > 0 || processorsManager!.busyProcessors.Count > 0)
             {
-                Console.WriteLine(tasksManager!.WaitingPriorityQueue.Count);
                 this.IncreaseProcessedTimeForTaskInProcessors();
                 this.SetTasksToWaitingPriorityQueue();
                 this.ProcessorsTasksManagement();

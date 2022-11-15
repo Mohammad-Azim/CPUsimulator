@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Newtonsoft.Json;
 
 //using System.Collections.Generic;
 
@@ -25,7 +26,8 @@ namespace Simulator
         {  //./Tasks.json
             string jsonString = File.ReadAllText(@"" + path);
             FilesManager? filesManager =
-               JsonSerializer.Deserialize<FilesManager>(jsonString);
+               JsonConvert.DeserializeObject<FilesManager>(jsonString);
+
             this.cpuNumber = filesManager!.cpuNumber;
             this.Tasks = filesManager.Tasks;
         }
