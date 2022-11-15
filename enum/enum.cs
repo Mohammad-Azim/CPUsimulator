@@ -7,6 +7,7 @@ namespace Simulator
             idle,
             busy
         }
+
         public enum Priority
         {
             high,

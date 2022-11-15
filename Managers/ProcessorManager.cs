@@ -20,7 +20,7 @@ namespace Simulator
             }
         }
 
-        public Processor? IsThereProcessorWithLowTask()
+        public Processor? GetProcessorWithLowTask()
         {
             foreach (Processor processors in this.busyProcessors)
             {
