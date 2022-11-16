@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Newtonsoft.Json;
 
 //using System.Collections.Generic;
@@ -14,16 +13,13 @@ namespace Simulator
 
     class FilesManager
     {
-
-
         // public Dictionary<string, Dictionary<int, List<CPUTask>>>? AllDicTasks { get; set; }
 
         public string[] SimulatorResults = { "--------CPU Simulator--------" };
 
         public void CreateFileWithResults(string[] lines)
         {
-            string date = DateTime.Now.ToString("yyyyMMddHHmmss");
-            var myUniqueFileName = $@"./FilesManager/results({date}).txt";
+            var myUniqueFileName = @"/home/mohammad/CSharp/CPUsimulator/FilesManager/results(1).txt";
             File.WriteAllLinesAsync(myUniqueFileName, lines);
         }
 
