@@ -84,14 +84,41 @@ namespace Simulator
         }
 
         [Fact]
-        public void TestProcessorsTasksManagement()
+        public void TestProcessorsTasksManagementOne()
         {
-
+            SetTasksAndProcessorsManagers();
+            scheduler.AddTaskToProcessor(TasksManagerTest.myTask2);
+            scheduler.tasksManager!.WaitingPriorityQueue.Enqueue(TasksManagerTest.myTask1, TaskPriority.high);
+            Assert.Single(processorsManager.idleProcessors); // before
+            scheduler.ProcessorsTasksManagement();
+            Assert.Empty(processorsManager.idleProcessors);// after
         }
 
+        [Fact]
+        public void TestProcessorsTasksManagementTwo()
+        {
+            SetTasksAndProcessorsManagers();
+            TasksManagerTest.myTask1.Priority = TaskPriority.high; // to make sure
+            TasksManagerTest.myTask2.Priority = TaskPriority.low;
+
+            scheduler.AddTaskToProcessor(TasksManagerTest.myTask1);// high task
+            scheduler.AddTaskToProcessor(TasksManagerTest.myTask2);// low task
+
+            scheduler.tasksManager!.WaitingPriorityQueue.Enqueue(TasksManagerTest.myTask3, TaskPriority.high);
+
+            Assert.Equal(TaskPriority.high, TasksManagerTest.myTask3.Priority);
 
 
 
+            scheduler.ProcessorsTasksManagement();
+
+            foreach (Processor processor in processorsManager.busyProcessors)
+            {
+                Assert.Equal(TaskPriority.high, processor.CurrentTask!.Priority);
+            }
+
+
+        }
     }
 
 
