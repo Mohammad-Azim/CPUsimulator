@@ -6,11 +6,16 @@ using Newtonsoft.Json;
 namespace Simulator
 {
 
+    class MyDeserializer
+    {
+        public int cpuNumber { get; set; }
+        public List<CPUTask>? Tasks { get; set; }
+    }
+
     class FilesManager
     {
 
-        public int cpuNumber { get; set; }
-        public List<CPUTask>? Tasks { get; set; }
+
         // public Dictionary<string, Dictionary<int, List<CPUTask>>>? AllDicTasks { get; set; }
 
         public string[] SimulatorResults = { "--------CPU Simulator--------" };
@@ -22,14 +27,12 @@ namespace Simulator
             File.WriteAllLinesAsync(myUniqueFileName, lines);
         }
 
-        public void StartFilesManaging(string path)
+        public (int, List<CPUTask>) StartFilesManaging(string path)
         {  //./Tasks.json
             string jsonString = File.ReadAllText(@"" + path);
-            FilesManager? filesManager =
-               JsonConvert.DeserializeObject<FilesManager>(jsonString);
-
-            this.cpuNumber = filesManager!.cpuNumber;
-            this.Tasks = filesManager.Tasks;
+            MyDeserializer? filesManager =
+               JsonConvert.DeserializeObject<MyDeserializer>(jsonString);
+            return (filesManager!.cpuNumber, filesManager.Tasks!);
         }
 
 
