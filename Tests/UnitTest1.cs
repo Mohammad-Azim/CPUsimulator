@@ -188,18 +188,90 @@ namespace Simulator
     public class SchedulerTest
     {
 
-        ProcessorsManager myProcessorsManager = new ProcessorsManager(2);
+        ProcessorsManager processorsManager = new ProcessorsManager(2);
         TasksManager tasksManager = new TasksManager(TasksManagerTest.AllTasksList);
 
+        Scheduler scheduler = new Scheduler();
+
+        static Processor myProcessor = new Processor()
+        {
+            Id = 1,
+            state = ProcessorState.busy,
+            CurrentTask = null
+
+        };
+
+
+        [Fact]
+        public void TestAddTaskToBusyProcessor()
+        {
+            scheduler.processorsManager = processorsManager;
+            scheduler.tasksManager = tasksManager;
+
+            scheduler.AddTaskToBusyProcessor(myProcessor, TasksManagerTest.myTask1);
+            Assert.Equal(TasksManagerTest.myTask1, myProcessor.CurrentTask);
+        }
+
+        [Fact]
+        public void TestAddTaskToProcessor()
+        {
+            scheduler.processorsManager = processorsManager;
+            scheduler.tasksManager = tasksManager;
+
+            scheduler.AddTaskToProcessor(TasksManagerTest.myTask2);
+            Assert.Equal(TasksManagerTest.myTask2, processorsManager.busyProcessors[0].CurrentTask);
+        }
+
+
+        [Fact]
+        public void TestRemoveTaskFromProcessor()
+        {
+            scheduler.processorsManager = processorsManager;
+            scheduler.tasksManager = tasksManager;
+            scheduler.AddTaskToProcessor(TasksManagerTest.myTask2);// add then will test the remove
+
+            Processor processorToTest = scheduler.processorsManager.busyProcessors[0];
+
+            Assert.Equal(1, scheduler.processorsManager.busyProcessors.Count);
+            scheduler.RemoveTaskFromProcessor(scheduler.processorsManager.busyProcessors[0]);
+            Assert.Empty(scheduler.processorsManager.busyProcessors); // check if it was removed
+
+        }
+
+        [Fact]
+        public void TestSetTasksToWaitingPriorityQueue()
+        {
+            scheduler.processorsManager = processorsManager;
+            scheduler.tasksManager = tasksManager;
+            scheduler.ClockCycleNow = 0;
+
+            Assert.Equal(0, scheduler.tasksManager.WaitingPriorityQueue.Count);
+            scheduler.SetTasksToWaitingPriorityQueue();
+            Assert.Equal(1, scheduler.tasksManager.WaitingPriorityQueue.Count);
+        }
+
+
+        [Fact]
+        public void TestIncreaseProcessedTimeForTaskInProcessors()
+        {
+            scheduler.processorsManager = processorsManager;
+            scheduler.tasksManager = tasksManager;
+            scheduler.AddTaskToProcessor(TasksManagerTest.myTask1);
+
+            Assert.Equal(0, TasksManagerTest.myTask1.ProcessedTime);
+            scheduler.IncreaseProcessedTimeForTaskInProcessors();
+            Assert.Equal(1, TasksManagerTest.myTask1.ProcessedTime);
+        }
+
+        [Fact]
+        public void TestProcessorsTasksManagement()
+        {
+
+        }
 
 
 
-        // [Fact]
-        // public void TestAddTaskToProcessor()
-        // {
-        //     scheduler.AddTaskToProcessor(tasksManager.AllTasksList[0]);
-        //     Assert.Equal(tasksManager.AllTasksList[0], processorsManager.busyProcessorsl);
-        // }
+
     }
 
 

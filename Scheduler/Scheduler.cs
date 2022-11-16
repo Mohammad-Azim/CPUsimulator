@@ -3,8 +3,8 @@ namespace Simulator
     class Scheduler
     {
         public int ClockCycleNow = 0;
-        ProcessorsManager? processorsManager;
-        TasksManager? tasksManager;
+        public ProcessorsManager? processorsManager;
+        public TasksManager? tasksManager;
 
         public string[] SimulatorData = { "--------CPU Simulator--------" };
 
@@ -34,7 +34,6 @@ namespace Simulator
         {
             // Call every cycle
             int currentCycle = this.ClockCycleNow;
-
 
             while (tasksManager!.AllTasksList.Count > 0)
             {
@@ -108,7 +107,7 @@ namespace Simulator
         public void ProcessorsTasksManagement()
         {
 
-            while (tasksManager!.WaitingPriorityQueue.Count > 0 && (processorsManager!.idleProcessors.Count > 0 || processorsManager!.GetProcessorWithLowTask() != null && tasksManager.WaitingPriorityQueue.Peek().Priority == TaskPriority.high))
+            while (tasksManager!.WaitingPriorityQueue.Count > 0 && (processorsManager!.idleProcessors.Count > 0 || (processorsManager!.GetProcessorWithLowTask() != null && tasksManager.WaitingPriorityQueue.Peek().Priority == TaskPriority.high)))
             {
                 if (processorsManager!.idleProcessors.Count > 0)
                 {
