@@ -1,0 +1,948 @@
+{
+  "CPUsimulator.dll": {
+    "/home/mohammad/CSharp/CPUsimulator/FilesManager/FilesManager.cs": {
+      "Simulator.FilesManager": {
+        "System.Int32 Simulator.FilesManager::get_cpuNumber()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.List`1<Simulator.CPUTask> Simulator.FilesManager::get_Tasks()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.FilesManager::CreateFileWithResults(System.String[])": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.FilesManager::StartFilesManaging(System.String)": {
+          "Lines": {
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0
+          },
+          "Branches": [
+            {
+              "Line": 27,
+              "Offset": 3,
+              "EndOffset": 5,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 3,
+              "EndOffset": 11,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Simulator.FilesManager::.ctor()": {
+          "Lines": {
+            "16": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/Managers/ProcessorManager.cs": {
+      "Simulator.ProcessorsManager": {
+        "System.Void Simulator.ProcessorsManager::CreateProcessors(System.Int32)": {
+          "Lines": {
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0
+          },
+          "Branches": [
+            {
+              "Line": 11,
+              "Offset": 60,
+              "EndOffset": 5,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 60,
+              "EndOffset": 62,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "Simulator.Processor Simulator.ProcessorsManager::GetProcessorWithLowTask()": {
+          "Lines": {
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0
+          },
+          "Branches": [
+            {
+              "Line": 25,
+              "Offset": 56,
+              "EndOffset": 16,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 41,
+              "EndOffset": 43,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 41,
+              "EndOffset": 48,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 25,
+              "Offset": 56,
+              "EndOffset": 58,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Simulator.ProcessorsManager::.ctor(System.Int32)": {
+          "Lines": {
+            "5": 0,
+            "6": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/Managers/TaskManager.cs": {
+      "Simulator.TasksManager": {
+        "System.Boolean Simulator.TasksManager::IsTaskDone(Simulator.CPUTask)": {
+          "Lines": {
+            "12": 0,
+            "14": 0,
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.TasksManager::SetAllTasks(System.Collections.Generic.List`1<Simulator.CPUTask>)": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": [
+            {
+              "Line": 21,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 15,
+              "EndOffset": 20,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Simulator.TasksManager::.ctor(System.Collections.Generic.List`1<Simulator.CPUTask>)": {
+          "Lines": {
+            "7": 0,
+            "8": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "28": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/Program.cs": {
+      "Simulator.Program": {
+        "System.Void Simulator.Program::Main()": {
+          "Lines": {
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "17": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/Scheduler/Scheduler.cs": {
+      "Simulator.Scheduler": {
+        "System.Void Simulator.Scheduler::IncreaseProcessedTimeForTaskInProcessors()": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0
+          },
+          "Branches": [
+            {
+              "Line": 14,
+              "Offset": 22,
+              "EndOffset": 27,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 136,
+              "EndOffset": 62,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 92,
+              "EndOffset": 94,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 92,
+              "EndOffset": 106,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 136,
+              "EndOffset": 138,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 14,
+              "Offset": 22,
+              "EndOffset": 156,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Simulator.Scheduler::SetTasksToWaitingPriorityQueue()": {
+          "Lines": {
+            "34": 0,
+            "36": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "52": 0
+          },
+          "Branches": [
+            {
+              "Line": 38,
+              "Offset": 135,
+              "EndOffset": 10,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 41,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 41,
+              "Offset": 40,
+              "EndOffset": 45,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 51,
+              "EndOffset": 53,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 51,
+              "EndOffset": 56,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 135,
+              "EndOffset": 137,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Simulator.Scheduler::RemoveTaskFromProcessor(Simulator.Processor)": {
+          "Lines": {
+            "55": 0,
+            "56": 0,
+            "58": 0,
+            "59": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "78": 0,
+            "79": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.Scheduler::AddTaskToProcessor(Simulator.CPUTask)": {
+          "Lines": {
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "90": 0,
+            "91": 0,
+            "93": 0,
+            "94": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.Scheduler::AddTaskToBusyProcessor(Simulator.Processor,Simulator.CPUTask)": {
+          "Lines": {
+            "98": 0,
+            "99": 0,
+            "101": 0,
+            "103": 0,
+            "104": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.Scheduler::ProcessorsTasksManagement()": {
+          "Lines": {
+            "108": 0,
+            "110": 0,
+            "111": 0,
+            "112": 0,
+            "113": 0,
+            "114": 0,
+            "115": 0,
+            "116": 0,
+            "118": 0,
+            "119": 0,
+            "120": 0,
+            "121": 0,
+            "122": 0,
+            "123": 0,
+            "124": 0,
+            "125": 0,
+            "126": 0,
+            "127": 0
+          },
+          "Branches": [
+            {
+              "Line": 110,
+              "Offset": 206,
+              "EndOffset": 3,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 112,
+              "Offset": 25,
+              "EndOffset": 27,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 112,
+              "Offset": 25,
+              "EndOffset": 56,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 120,
+              "Offset": 78,
+              "EndOffset": 80,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 120,
+              "Offset": 78,
+              "EndOffset": 110,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 129,
+              "EndOffset": 131,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 148,
+              "EndOffset": 150,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 167,
+              "EndOffset": 169,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 167,
+              "EndOffset": 195,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 148,
+              "EndOffset": 198,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 129,
+              "EndOffset": 201,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 206,
+              "EndOffset": 211,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Simulator.Scheduler::ClockCycleRunner()": {
+          "Lines": {
+            "132": 0,
+            "133": 0,
+            "134": 0,
+            "135": 0,
+            "136": 0,
+            "137": 0,
+            "138": 0,
+            "139": 0,
+            "140": 0,
+            "141": 0
+          },
+          "Branches": [
+            {
+              "Line": 133,
+              "Offset": 102,
+              "EndOffset": 3,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 133,
+              "Offset": 57,
+              "EndOffset": 59,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 133,
+              "Offset": 76,
+              "EndOffset": 78,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 133,
+              "Offset": 57,
+              "EndOffset": 99,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 133,
+              "Offset": 76,
+              "EndOffset": 99,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 133,
+              "Offset": 102,
+              "EndOffset": 104,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Simulator.Scheduler::scheduling(Simulator.TasksManager,Simulator.ProcessorsManager)": {
+          "Lines": {
+            "145": 0,
+            "146": 0,
+            "147": 0,
+            "148": 0,
+            "149": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.Scheduler::.ctor()": {
+          "Lines": {
+            "5": 0,
+            "9": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/Tasks/Tasks.cs": {
+      "Simulator.CPUTask": {
+        "System.String Simulator.CPUTask::get_Id()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Simulator.CPUTask::get_RequestedTime()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Simulator.CPUTask::get_CreationTime()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Simulator.CPUTask::get_CompletionTime()": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Simulator.CPUTask::get_ProcessedTime()": {
+          "Lines": {
+            "16": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.CPUTask::.ctor()": {
+          "Lines": {
+            "20": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/tests/FilesManagerTests.cs": {
+      "Simulator.FilesManagerTests": {
+        "System.Void Simulator.FilesManagerTests::testStartReading()": {
+          "Lines": {
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0
+          },
+          "Branches": [
+            {
+              "Line": 15,
+              "Offset": 45,
+              "EndOffset": 47,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 15,
+              "Offset": 45,
+              "EndOffset": 59,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/tests/ProcessorsManagerTest.cs": {
+      "Simulator.ProcessorsManagerTest": {
+        "System.Void Simulator.ProcessorsManagerTest::TestCreateProcessors()": {
+          "Lines": {
+            "35": 0,
+            "36": 0,
+            "37": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.ProcessorsManagerTest::TestGetProcessorWithLowTask()": {
+          "Lines": {
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "47": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.ProcessorsManagerTest::.ctor()": {
+          "Lines": {
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.ProcessorsManagerTest::.cctor()": {
+          "Lines": {
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/tests/SchedulerTest.cs": {
+      "Simulator.SchedulerTest": {
+        "System.Void Simulator.SchedulerTest::SetTasksAndProcessorsManagers()": {
+          "Lines": {
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.SchedulerTest::TestAddTaskToBusyProcessor()": {
+          "Lines": {
+            "32": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.SchedulerTest::TestAddTaskToProcessor()": {
+          "Lines": {
+            "41": 0,
+            "42": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.SchedulerTest::TestRemoveTaskFromProcessor()": {
+          "Lines": {
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "55": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "61": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.SchedulerTest::TestSetTasksToWaitingPriorityQueue()": {
+          "Lines": {
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "69": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.SchedulerTest::TestIncreaseProcessedTimeForTaskInProcessors()": {
+          "Lines": {
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.SchedulerTest::TestProcessorsTasksManagementOne()": {
+          "Lines": {
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "95": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.SchedulerTest::TestProcessorsTasksManagementTwo()": {
+          "Lines": {
+            "99": 0,
+            "100": 0,
+            "101": 0,
+            "102": 0,
+            "104": 0,
+            "105": 0,
+            "107": 0,
+            "109": 0,
+            "113": 0,
+            "115": 0,
+            "116": 0,
+            "117": 0,
+            "118": 0,
+            "121": 0
+          },
+          "Branches": [
+            {
+              "Line": 115,
+              "Offset": 176,
+              "EndOffset": 141,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 115,
+              "Offset": 176,
+              "EndOffset": 178,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Simulator.SchedulerTest::.ctor()": {
+          "Lines": {
+            "10": 0,
+            "11": 0,
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.SchedulerTest::.cctor()": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/mohammad/CSharp/CPUsimulator/tests/TasksManagerTest.cs": {
+      "Simulator.TasksManagerTest": {
+        "System.Void Simulator.TasksManagerTest::TestIsTaskDone()": {
+          "Lines": {
+            "55": 0,
+            "56": 0,
+            "57": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.TasksManagerTest::TestSetAllTasks()": {
+          "Lines": {
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.TasksManagerTest::.ctor()": {
+          "Lines": {
+            "50": 0
+          },
+          "Branches": []
+        },
+        "System.Void Simulator.TasksManagerTest::.cctor()": {
+          "Lines": {
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}

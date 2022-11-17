@@ -1,3 +1,5 @@
+
+
 namespace Simulator
 {
 
@@ -6,14 +8,17 @@ namespace Simulator
 
         public string? Id { get; init; }
         public int RequestedTime { get; init; }
-        public string? Priority { get; init; }
 
-        //  the below can be modified
         public int CreationTime { get; set; }
-        public string? State { get; set; }
-        public int CompletionTime { get; set; }
 
-        public int ProcessedTime { get; set; }
+        public int CompletionTime { get; set; } = 0;
+
+        public int ProcessedTime { get; set; } = 0;
+
+        public TaskPriority Priority;
+
+        public TaskState State = TaskState.waiting;
+
 
     }
 }
