@@ -21,8 +21,8 @@ namespace Simulator
         {
             FilesManager myFileManager = new FilesManager();
             string[] stringArray = { "this is test", "from test" };
-            myFileManager.CreateFileWithResults(stringArray);
-            string text = File.ReadAllText(@"/home/mohammad/CSharp/CPUsimulator/FilesManager/results(1).txt");
+            myFileManager.CreateFileWithResults("../../../tests/results(test).txt", stringArray);
+            string text = File.ReadAllText(@"../../../tests/results(test).txt");
             Assert.Equal("this is test\nfrom test\n", text);
         }
     }

@@ -17,9 +17,9 @@ namespace Simulator
 
         public string[] SimulatorResults = { "--------CPU Simulator--------" };
 
-        public void CreateFileWithResults(string[] lines)
+        public void CreateFileWithResults(string path, string[] lines)
         {
-            var myUniqueFileName = @"/home/mohammad/CSharp/CPUsimulator/FilesManager/results(1).txt";
+            var myUniqueFileName = @"" + path;
             File.WriteAllLinesAsync(myUniqueFileName, lines);
         }
 
@@ -28,6 +28,8 @@ namespace Simulator
             string jsonString = File.ReadAllText(@"" + path);
             MyDeserializer? filesManager =
                JsonConvert.DeserializeObject<MyDeserializer>(jsonString);
+
+
             return (filesManager!.cpuNumber, filesManager.Tasks!);
         }
 
