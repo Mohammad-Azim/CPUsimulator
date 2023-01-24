@@ -1,0 +1,53 @@
+Assignment Description
+
+In this assignment, you are required to build a simulator that simulates processor execution for processes (tasks)
+Assuming that we have P processors, consider the following notes about the processor execution:
+
+ • A processor can only execute one task at a time.
+ • The number of processors is fixed during the whole simulation.
+ • All processors are synchronized, i.e., they all have the same clock
+ • Processors are given unique ids as follows: p1 P2 P3 P4 etc.
+ • Tasks are given unique ids as follows: T1 T2 T3 etc.
+ • Clock cycles are given unique ids as follows: C1 C2 3 etc.
+ • A task is defined by the following:
+ 	Creation time: the clock cycle in which the task was created.
+ 	Requested time: the number of clock cycles the task needs to execute till completion.
+ 	Completion time: the clock cycle in which the task was completed.
+ 	Priority: which can be either high or low.
+ 	State: which can be either one of three states (described below).
+ • When a task is created, it must be automatically put in a queue.
+ • simulator has a scheduler that is responsible for determining the assignment of tasks that are waiting in the queue to processors that are available.
+ • A task can have only one of three states: either waiting" in the queue, "executing" on a processor, or "completed "
+ • A processor can have only one of two states: "busy" or "idle"
+ • If there is a processor that is available, then the schedular must prioritize the assignment of tasks with "high priority" over tasks with "low priority"
+ • If there is a tie, a processor became available and there are two "high priority" tasks waiting then will leave it to you to determine how the
+ scheduler should break ties. The same goes for breaking ties between "low priority" tasks.
+ • Low priority tasks can be interrupted. For example, if a high priority task is created, and there was a processor that is running a low priority task,
+ then the schedular must remove the low priority task from the processor and put it in the waiting queue, and then assign the high priority task to the processor 
+ • a low priority task is interrupted, when executed again, it only needs to run for the remaining time of its requested time. For example, if a low priority
+ task requested to run for 30 cycles, and it was interrupted during the tenth cycle, then when it runs again, it only needs to run for 20 cycles.
+ • High priority tasks cannot be interrupted For simplicity we will assume task creation time is negligible.
+ For example, if a task was created during cycle N, and there was an available processor, then this task can be immediately assigned to this processor in the same cycle N.
+
+
+Implementation requirements
+ • Implement the simulator with the above specifications using object-oriented programming and SOLID priciples.
+ • What should be a class? What interface should each class have? What are the relationships between classes? What data structures should I use? These are some of the questions
+ that you should carefully consider.
+ • Assume that your simulator is maybe extended by others in the future. Therefore, pay careful attention to object oriented design to make your code: organized,
+ flexible, and reusable.
+ • First, implement your simulator while assuming a simple tie breaking strategy for tasks. Second, consider implementing advanced tie breaking strategies. 
+ The reason the tie breaking strategy is important because it can significantly impact performance, i.e., how long it takes all processors to executed all tasks.
+ However, your main concern should be first to implement the full simulator with the given specifications. Then, worry about the tie breaking strategy.
+ • Your simulator must be configurable using an input configuration file that specifies the number of processors and tasks, as well as the needed
+ descriptions for each task (creation time, requested time, and priority) the stucture and type of the configuration file is up to you (Json, text, etc..). 
+ • Your simulator must produce meaningful output to the user that contains information about the total simulation time, completion times for all tasks,
+ and other information you think is important, it's also up to you.
+
+
+ Deliverables 
+1. Class Diagram for your design.
+2. Your code.
+3. Unit tests for your code.
+4. Any instructions needed to run it.
+5. Further explainations if exist.
