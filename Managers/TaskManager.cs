@@ -1,58 +1,31 @@
+
 namespace Simulator
 {
     class TasksManager
     {
-        public static Queue<CPUTask> HighTasksWaiting = new Queue<CPUTask>();
-        public static Queue<CPUTask> LowTasksWaiting = new Queue<CPUTask>();
-        public static Queue<CPUTask> InterruptedTasks = new Queue<CPUTask>();
+
+        public List<CPUTask> AllTasksList = new List<CPUTask>();
+        public PriorityQueue<CPUTask, TaskPriority> WaitingPriorityQueue = new PriorityQueue<CPUTask, TaskPriority>();
 
 
-        public static bool IsThereTaskInDictionary(JSONAdapter JsonAdapter)
-        {
-            // call it only after the Converter method (if you will call it in the constructor) 
-            // because of the Nullable reference types
-            return (JsonAdapter.AllDicTasks!["high"].Any() || JsonAdapter.AllDicTasks!["low"].Any());
-        }
-
-        public static bool IsTaskDone(CPUTask task)
+        public bool IsTaskDone(CPUTask task)
         {
             // check if task in cpu is done
             return (task.ProcessedTime == task.RequestedTime);
         }
 
 
-        public static void SetTasksToWaitingBasedOnPriority(Dictionary<string, Dictionary<int, List<CPUTask>>> AllTasks)
+        public void SetAllTasks(List<CPUTask> TasksList)
         {
-            // Call every cycle
-
-            int currentCycle = Scheduler.ClockCycleNow;
-
-
-            if (AllTasks["high"].ContainsKey(currentCycle))
-            {
-
-                foreach (CPUTask task in AllTasks["high"][currentCycle])
-                {
-                    task.State = "waiting";
-                    TasksManager.HighTasksWaiting.Enqueue(task);
-
-
-
-                }
-                AllTasks["high"].Remove(currentCycle);
-            }
-
-            if (AllTasks["low"].ContainsKey(currentCycle))
-            {
-                foreach (var task in AllTasks["low"][currentCycle])
-                {
-                    task.State = "waiting";
-                    TasksManager.LowTasksWaiting.Enqueue(task);
-                }
-                AllTasks["low"].Remove(currentCycle);
-            }
+            AllTasksList = TasksList!;
+            AllTasksList?.Sort((x, y) => x.CreationTime.CompareTo(y.CreationTime));
         }
 
+        public TasksManager(List<CPUTask> TasksList)
+        {
+            this.SetAllTasks(TasksList);
+
+        }
     }
 
 

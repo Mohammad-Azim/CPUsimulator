@@ -2,92 +2,39 @@ namespace Simulator
 {
     class ProcessorsManager
     {
-        public static Queue<Processor> idleProcessors = new Queue<Processor>();
-        public static Dictionary<int, Processor> busyProcessors = new Dictionary<int, Processor>();
+        public List<Processor> idleProcessors = new List<Processor>();
+        public List<Processor> busyProcessors = new List<Processor>();
 
 
-        public static void CreateProcessors(int ProcessorsNumber)
+        public void CreateProcessors(int ProcessorsNumber)
         {
             for (int x = 1; x <= ProcessorsNumber; x++)
             {
                 Processor NewProcessor = new Processor();
 
                 NewProcessor.Id = x;
-                NewProcessor.state = "idle";
+                NewProcessor.state = ProcessorState.idle;
                 NewProcessor.CurrentTask = null;
 
-                ProcessorsManager.idleProcessors.Enqueue(NewProcessor);
+                this.idleProcessors.Add(NewProcessor);
             }
         }
 
-        public static void AddTaskToProcessor(CPUTask Task)
+        public Processor? GetProcessorWithLowTask()
         {
-            Processor processor = ProcessorsManager.idleProcessors.Dequeue();
-            ProcessorsManager.busyProcessors.Add(processor.Id, processor);
-
-
-            processor.CurrentTask = Task;
-            processor.state = "busy";
-
-            Task.State = "executing";
-            Task.CreationTime = Scheduler.ClockCycleNow;
-        }
-
-
-        public static void AddTaskToBusyProcessor(Processor processor, CPUTask task)
-        {
-            CPUTask oldTask = processor.CurrentTask!;
-
-            processor.CurrentTask = task;
-            TasksManager.InterruptedTasks.Enqueue(oldTask);
-        }
-
-
-        public static Processor? IsThereProcessorWithLowTask()
-        {
-            foreach (int processorsKey in ProcessorsManager.busyProcessors.Keys)
+            foreach (Processor processors in this.busyProcessors)
             {
-                Processor currentProcessor = ProcessorsManager.busyProcessors[processorsKey];
-
-                if (currentProcessor.CurrentTask!.Priority == "low")
+                if (processors.CurrentTask!.Priority == TaskPriority.low)
                 {
-                    return currentProcessor;
+                    return processors;
                 }
-
             }
             return null;
         }
 
-
-        public static void RemoveTaskFromProcessor(Processor processor)
+        public ProcessorsManager(int cpuNumber)
         {
-            CPUTask task = processor.CurrentTask!;
-
-            task.State = "completed";
-            task.CompletionTime = Scheduler.ClockCycleNow;
-
-
-            processor.CurrentTask = null;
-            ProcessorsManager.busyProcessors.Remove(processor.Id);
-            ProcessorsManager.idleProcessors.Enqueue(processor);
-
-
-            string[] NewTaskResults = {
-                "New Task Finished",$"task Id: {task.Id}",
-                $"Task State: {task.State}",
-                $"Task CreationTime: {task.CreationTime}",
-                $"Task CompletionTime: {task.CompletionTime}",
-                $"Task ProcessedTime: {task.ProcessedTime}",
-                $"Task RequestedTime: {task.RequestedTime}",
-                ""
-                };
-
-            Results.SimulatorResults = Results.SimulatorResults.Concat(NewTaskResults).ToArray();
-
-            Results.PrintResultInCMD(task);
-
+            this.CreateProcessors(cpuNumber);
         }
-
-
     }
 }
